@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <input type="text" id="search" placeholder="Search products...">
+    <h1>CAMPUS STORE</h1>
+    <button id="cart-btn">Cart (<span id="cart-count">0</span>)</button>
+    </header>
+    <div class="hero">
+    <h2>Welcome to Campus Store 🛒</h2>
+    <p>Fast delivery. Affordable prices.</p>
+</div>
+
+<main class="hero">
+    <div class="categories">
+    <button onclick="filterCategory('all')">All</button>
+    <button onclick="filterCategory('electronics')">Electronics</button>
+    <button onclick="filterCategory('fashion')">Fashion</button>
+</div>
+    <div class="products">
+
+        <div class="product"data-category="electronics">
+            <img src="images/charger.jpg" alt="Phone Charger">
+            <h2>Phone Charger</h2>
+            <p>$10</p>
+            <button class="add-to-cart" data-product="Phone Charger" data-price="10">
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="product"data-category="fashion">
+                <img src="images/T-shirt.jpg" alt="T-shirt">
+            <h2>T-Shirt</h2>
+            <p>$15</p>
+            <button class="add-to-cart" data-product="T-Shirt" data-price="15">
+                Add to Cart
+            </button>
+        </div>
+<div class="product"data-category="fashion">
+                <img src="images/Watch.jpg" alt="Watch">
+            <h2>Watch</h2>
+            <p>$15</p>
+            <button class="add-to-cart" data-product="Watch" data-price="15">
+                Add to Cart
+            </button>
+            </div>
+            <div class="product"data-category="all">
+                <img src="images/Cup.jpg" alt="Cup">
+            <h2>Cup</h2>
+            <p>$15</p>
+            <button class="add-to-cart" data-product="Cup" data-price="15">
+                Add to Cart
+            </button>
+            </div>
+            
+    </div>
+
+    <div id="cart-modal" class="modal">
+        <h2>Your Cart</h2>
+        <ul id="cart-items"></ul>
+        <p>Total: $<span id="cart-total">0.00</span></p>
+        <button id="checkout-btn">Order on WhatsApp</button>
+    </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

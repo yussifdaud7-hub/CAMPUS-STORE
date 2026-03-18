@@ -1,0 +1,244 @@
+/* ==============================
+   GENERAL
+============================== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
+/* ==============================
+   HEADER
+============================== */
+header {
+    background-color: #111;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+#cart-btn {
+    background-color: #ff9800;
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+#checkout-btn {
+    background-color: #45a049;
+
+}
+
+
+#cart-btn:hover {
+    background-color: #e68a00;
+}
+
+/* ==============================
+   PRODUCTS GRID
+============================== */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.product {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.product h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.product p {
+    font-size: 1em;
+    margin-bottom: 15px;
+}
+
+/* ==============================
+   BUTTONS
+============================== */
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.add-to-cart {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.add-to-cart:hover {
+    background-color: #45a049;
+}
+
+.remove-btn {
+    background-color: red;
+    color: white;
+    margin-left: 10px;
+    padding: 3px 8px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.remove-btn:hover {
+    background-color: darkred;
+}
+
+/* ==============================
+   CART MODAL
+============================== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 320px;
+    max-height: 400px;
+    overflow-y: auto;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    z-index: 100;
+}
+
+.modal.show {
+    display: block;
+}
+
+#cart-items li {
+    margin-bottom: 10px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ==============================
+   MOBILE RESPONSIVE
+============================== */
+@media screen and (max-width: 480px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    .modal {
+        width: 90%;
+    }
+}
+/* SEARCH BAR */
+#search {
+    padding: 10px;
+    width: 200px;
+    border-radius: 5px;
+    border: none;
+}
+
+/* CATEGORIES */
+.categories {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    justify-content: center;
+    background: white;
+}
+
+.categories button {
+    background: #eee;
+    color: black;
+}
+
+.categories button:hover {
+    background: #ff9800;
+    color: white;
+}
+
+/* HERO BANNER */
+.hero {
+    background: linear-gradient(to right, orange, red);
+    color: white;
+    text-align: center;
+    padding: 40px;
+    font-size: 1.5em;
+}
+.hero {
+    background: linear-gradient(to right, orange, red);
+    color: white;
+    text-align: center;
+    padding: 40px;
+    font-size: 1.5em;
+}
+.hero h2 {
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 0.9em;
+}
+/* MOBILE IMPROVEMENTS */
+@media screen and (max-width: 600px) {
+
+    header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    #search {
+        width: 100%;
+    }
+
+    .categories {
+        flex-wrap: wrap;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 20px;
+        font-size: 1.2em;
+    }
+
+    .modal {
+        width: 90%;
+    }
+}
