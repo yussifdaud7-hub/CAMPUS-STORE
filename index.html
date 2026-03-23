@@ -3,69 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campus Store</title>
+    <title>Karim Appliance</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<div class="bottom-nav">
+    <button onclick="window.scrollTo(0,0)">🏠<br>Home</button>
+    <button onclick="cartModal.classList.toggle('show')">🛒<br>Cart</button>
+    <button onclick="alert('Orders coming soon')">📦<br>Orders</button>
+</div>
 <body>
 
 <header>
+    <div class="logo">Karim Maconzy</div>
     <input type="text" id="search" placeholder="Search products...">
-    <h1>CAMPUS STORE</h1>
     <button id="cart-btn">Cart (<span id="cart-count">0</span>)</button>
-    </header>
+</header>
     <div class="hero">
-    <h2>Welcome to Campus Store 🛒</h2>
-    <p>Fast delivery. Affordable prices.</p>
+   <h2>Welcome to Karim Appliance Experts 🛒</h2>
+    <p>Your gateway to quality products</p>
+    Fast delivery. Affordable prices.
 </div>
-
 <main class="hero">
     <div class="categories">
     <button onclick="filterCategory('all')">All</button>
     <button onclick="filterCategory('electronics')">Electronics</button>
     <button onclick="filterCategory('fashion')">Fashion</button>
 </div>
+<div class="slider">
+    <div class="slides" id="slides">
+
+        <div class="slide">
+            <img src="images/Phone holder.jpg">
+            <div class="overlay">
+                <h2>50% OFF ⚡</h2>
+                <p>Best Phone Accessories</p>
+            </div>
+                    </div>
+
+        <div class="slide">
+            <img src="images/Hair dryer.jpg">
+            <div class="overlay">
+                <h2>New products</h2>
+                <p>Stylish & Affordable</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img src="images/Blender.jpg">
+            <div class="overlay">
+                <h2>Hot Deals ☕</h2>
+                <p>Buy 1 Get 1 Free</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img src="images/Mini portable USB juicer.jpg">
+            <div class="overlay">
+                <h2>Electronics sales</h2>
+                <p>Trending Styles</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="dots" id="dots"></div>
+</div>
+
+    <!-- DOTS -->
+    <div class="dots" id="dots"></div>
+</div>
     <div class="products">
 
-        <div class="product"data-category="electronics">
-            <img src="charger.jpg" alt="Phone Charger">
-            <h2>Phone Charger</h2>
-            <p>$10</p>
-            <button class="add-to-cart" data-product="Phone Charger" data-price="10">
+        <div class="product"data-category="all">
+            <img src="images/Phone holder.jpg" alt="Phone holder">
+            <h2>Phone holder</h2>
+            <p>Ȼ25</p>
+            <button class="add-to-cart" data-product="Phone holder" data-price="25">
                 Add to Cart
             </button>
         </div>
 
-        <div class="product"data-category="fashion">
-                <img src="T-shirt.jpg" alt="T-shirt">
-            <h2>T-Shirt</h2>
-            <p>$15</p>
-            <button class="add-to-cart" data-product="T-Shirt" data-price="15">
+        <div class="product"data-category="electronics">
+                <img src="images/Tripode.jpg" alt="T-shirt">
+            <h2>Tripode</h2>
+            <p>Ȼ130</p>
+            <button class="add-to-cart" data-product="Tripode" data-price="130">
                 Add to Cart
             </button>
         </div>
-<div class="product"data-category="fashion">
-                <img src="Watch.jpg" alt="Watch">
-            <h2>Watch</h2>
-            <p>$15</p>
-            <button class="add-to-cart" data-product="Watch" data-price="15">
+<div class="product"data-category="all">
+                <img src="images/Mini Laptop Table.jpg" alt="Mini Laptop Table">
+            <h2>Mini Laptop Table</h2>
+            <p>Ȼ180</p>
+            <button class="add-to-cart" data-product="Mini Laptop Table" data-price="180">
                 Add to Cart
             </button>
             </div>
             <div class="product"data-category="all">
-                <img src="Cup.jpg" alt="Cup">
+                <img src="images/Cup.jpg" alt="Cup">
             <h2>Cup</h2>
-            <p>$15</p>
-            <button class="add-to-cart" data-product="Cup" data-price="15">
+            <p>Ȼ150</p>
+            <button class="add-to-cart" data-product="Cup" data-price="150">
                 Add to Cart
             </button>
             </div>
-            
+
+            <div class="product"data-category="electronics">
+                <img src="images/Blender.jpg" alt="Blender">
+            <h2>Blender</h2>
+            <p>Ȼ350</p>
+            <button class="add-to-cart" data-product="Blender" data-price="350">
+                Add to Cart
+            </button>
+            </div>
+
+            <div class="product"data-category="electronics">
+                <img src="images/Electric Kettle.jpg" alt="Electric Kettle">
+            <h2>Electric Kettle</h2>
+            <p>Ȼ170</p>
+            <button class="add-to-cart" data-product="Electric Kettle" data-price="170">
+                Add to Cart
+            </button>
+            </div>
+            <div class="product"data-category="electronics">
+                <img src="images/Hair dryer.jpg" alt="Hair dryer">
+            <h2>Hair dryer</h2>
+            <p>Ȼ100</p>
+            <button class="add-to-cart" data-product="Hair dryer" data-price="100">
+                Add to Cart
+            </button>
+            </div>
+            <div class="product"data-category="all">
+                <img src="images/Air fresher.jpg" alt="air ">
+            <h2>Air fresher</h2>
+            <p>Ȼ100</p>
+            <button class="add-to-cart" data-product="Air fresher" data-price="100">
+                Add to Cart
+            </button>
+            </div>
+             <div class="product"data-category="all">
+                <img src="images/3 in 1Collapsible Cutting Board With Foldable Washing Basin.jpg" alt="3 in 1Collapsible Cutting Board With Foldable Washing Basin – Grey & White ">
+            <h2>3in1 Collapsible Cutting Board With Foldable Washing Basin</h2>
+            <p>Ȼ80</p>
+            <button class="add-to-cart" data-product="3 in 1Collapsible Cutting Board With Foldable Washing Basin" data-price="80">
+                Add to Cart
+            </button>
+            </div>
+             <div class="product"data-category="electronics">
+                <img src="images/Mini portable USB juicer.jpg" alt="Mini portable USB juicer">
+            <h2>Mini portable USB juicer</h2>
+            <p>Ȼ100</p>
+            <button class="add-to-cart" data-product="Mini portable USB juicer" data-price="100">
+                Add to Cart
+            </button>
+            </div>
     </div>
+    
 
     <div id="cart-modal" class="modal">
         <h2>Your Cart</h2>
         <ul id="cart-items"></ul>
-        <p>Total: $<span id="cart-total">0.00</span></p>
+        <p>Total: Ȼ<span id="cart-total">0.00</span></p>
         <button id="checkout-btn">Order on WhatsApp</button>
     </div>
 </main>
