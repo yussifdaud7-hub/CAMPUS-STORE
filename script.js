@@ -1,265 +1,218 @@
-/* ======================
-   COLOR SYSTEM
-====================== */
-:root {
-    --primary: #dae8f0;
-    --secondary: #dbe4e6;
-    --dark: #0d1b2a;
-    --light: #f4f6f9;
-    --text: #111;
+// ============================
+// VARIABLES
+// ============================
+let cart = [];
+let total = 0;
+
+const cartBtn = document.getElementById("cart-btn");
+const cartModal = document.getElementById("cart-modal");
+const cartItems = document.getElementById("cart-items");
+const cartCount = document.getElementById("cart-count");
+const cartTotal = document.getElementById("cart-total");
+const checkoutBtn = document.getElementById("checkout-btn");
+
+// ============================
+// ADD TO CART
+// ============================
+document.querySelectorAll(".add-to-cart").forEach(button => {
+    button.addEventListener("click", () => {
+        const product = button.dataset.product;
+        const price = parseFloat(button.dataset.price);
+
+        if (!product || isNaN(price)) return;
+
+        cart.push({ product, price });
+        total += price;
+
+        updateCart();
+    });
+});
+
+// ============================
+// TOGGLE CART MODAL
+// ============================
+cartBtn.addEventListener("click", () => {
+    cartModal.classList.toggle("show");
+});
+
+// ============================
+// UPDATE CART FUNCTION
+// ============================
+function updateCart() {
+    cartItems.innerHTML = "";
+
+    cart.forEach((item, index) => {
+        const li = document.createElement("li");
+
+        li.innerHTML = `
+            ${item.product} - $${item.price.toFixed(2)}
+            <button onclick="removeItem(${index})" class="remove-btn">X</button>
+        `;
+
+        cartItems.appendChild(li);
+    });
+
+    cartCount.textContent = cart.length;
+    cartTotal.textContent = total.toFixed(2);
 }
 
-/* ======================
-   GLOBAL
-====================== */
-body {
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    background: var(--light);
-    color: var(--text);
+// ============================
+// REMOVE ITEM FUNCTION
+// ============================
+function removeItem(index) {
+    total -= cart[index].price;
+    cart.splice(index, 1);
+    updateCart();
 }
 
-/* ======================
-   HEADER
-====================== */
-header {
-    background: var(--dark);
-    color: white;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+// ============================
+// WHATSAPP CHECKOUT
+// ============================
+checkoutBtn.addEventListener("click", () => {
 
-.logo {
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
-/* SEARCH */
-#search {
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    width: 220px;
-}
-
-/* ======================
-   HERO
-====================== */
-.hero {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: rgb(20, 20, 194);
-    text-align: center;
-    padding: 0px 0px;
-    font-size:x-large;
-}
-
-/* ======================
-   CATEGORIES
-====================== */
-.categories {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 15px;
-}
-
-.categories button {
-    background: #67c1e2;
-    border-radius: 20px;
-    padding: 8px 15px;
-}
-
-.categories button:hover {
-    background: var(--primary);
-    color: rgba(9, 1, 24, 0.948);
-}
-
-/* ======================
-   PRODUCTS
-====================== */
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 20px;
-    padding: 50px;
-}
-
-.product {
-    background: rgba(255, 255, 255, 0.889);
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    transition: 0.3s;
-}
-
-.product:hover {
-    transform: translateY(-5px);
-}
-
-/* IMAGE */
-.product img {
-    width: 70%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-/* TEXT */
-.product h2 {
-    margin: 10px 0 5px;
-    font-size: 1.1em;
-    color: #111;
-}
-
-.product p {
-    font-weight: bold;
-    color:brown
-}
-
-/* BUTTON */
-button {
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.add-to-cart {
-    background: var(--primary);
-    color: rgb(37, 22, 198);
-    width: 100%;
-}
-
-/* ======================
-   MODAL
-====================== */
-.modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    width: 320px;
-    padding: 20px;
-    border-radius: 15px;
-}
-
-.modal.show {
-    display: block;
-}
-
-/* ======================
-   MOBILE
-====================== */
-@media (max-width: 100px) {
-    header {
-        flex-direction: column;
-        gap: 10px;
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
     }
 
-    #search {
-        width: 100%;
+    let name = prompt("Enter your name:");
+    let location = prompt("Enter delivery location:");
+    let phoneNumber = prompt("Enter your phone number:");
+
+    let message = `Hello, I want to order:\n\n`;
+    message += `Name: ${name}\n`;
+    message += `Location: ${location}\n`;
+    message += `Phone: ${phoneNumber}\n\n`;
+
+    cart.forEach(item => {
+        message += `${item.product} - $${item.price.toFixed(2)}\n`;
+    });
+
+    message += `\nTotal: $${total.toFixed(2)}`;
+
+    // SAVE ORDER (NEW)
+    saveOrder(name, location, phoneNumber);
+
+    const phone = "233257293354";
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+});
+function filterCategory(category) {
+    const products = document.querySelectorAll(".product");
+
+    products.forEach(product => {
+        if (category === "all" || product.dataset.category === category) {
+            product.style.display = "block";
+        } else {
+            product.style.display = "none";
+        }
+    });
+}
+document.getElementById("search").addEventListener("keyup", function () {
+    const value = this.value.toLowerCase();
+    const products = document.querySelectorAll(".product");
+
+    products.forEach(product => {
+        const name = product.querySelector("h2").textContent.toLowerCase();
+
+        if (name.includes(value)) {
+            product.style.display = "block";
+        } else {
+            product.style.display = "none";
+        }
+    });
+});
+function saveOrder(name, location, phoneNumber) {
+
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    const newOrder = {
+        id: Date.now(),
+        name,
+        location,
+        phoneNumber,
+        items: cart,
+        total: total,
+        status: "Pending",
+        date: new Date().toLocaleString()
+    };
+
+    orders.push(newOrder);
+
+    localStorage.setItem("orders", JSON.stringify(orders));
+}
+window.addEventListener("scroll", () => {
+    const header = document.querySelector("header");
+
+    if (window.scrollY > 10) {
+        header.style.boxShadow = "0 2px 10px rgba(0,0,0,0.1)";
+    } else {
+        header.style.boxShadow = "none";
+    }
+});
+const slides = document.getElementById("slides");
+const images = slides.querySelectorAll("img");
+const dotsContainer = document.getElementById("dots");
+
+let index = 0;
+
+/* CREATE DOTS */
+images.forEach((_, i) => {
+    const dot = document.createElement("span");
+    dot.addEventListener("click", () => showSlide(i));
+    dotsContainer.appendChild(dot);
+});
+
+const dots = dotsContainer.querySelectorAll("span");
+
+/* SHOW SLIDE */
+function showSlide(i) {
+    index = i;
+    slides.style.transform = `translateX(-${i * 100}%)`;
+
+    dots.forEach(dot => dot.classList.remove("active"));
+    dots[i].classList.add("active");
+}
+
+/* AUTO SLIDE */
+function autoSlide() {
+    index++;
+    if (index >= images.length) index = 0;
+    showSlide(index);
+}
+
+let interval = setInterval(autoSlide, 3000);
+
+/* PAUSE ON HOVER */
+slides.addEventListener("mouseover", () => clearInterval(interval));
+slides.addEventListener("mouseout", () => {
+    interval = setInterval(autoSlide, 3000);
+});
+
+/* INIT */
+showSlide(0);
+let startX = 0;
+let endX = 0;
+
+slides.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+});
+
+slides.addEventListener("touchend", e => {
+    endX = e.changedTouches[0].clientX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    if (startX - endX > 50) {
+        // swipe left
+        index++;
+        if (index >= images.length) index = 0;
+    } else if (endX - startX > 50) {
+        // swipe right
+        index--;
+        if (index < 0) index = images.length - 1;
     }
 
-    .products {
-        grid-template-columns: 1fr;
-    }
-}
-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: white;
-    display: flex;
-    justify-content: space-around;
-    border-top: 1px solid #ddd;
-    padding: 5px 0;
-}
-
-.bottom-nav button {
-    background: none;
-    border: none;
-    font-size: 14px;
-}
-body {
-    padding-bottom: 60px;
-}
-/* SLIDER CONTAINER */
-.slider {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    margin: 15px 0;
-    border-radius: 12px;
-}
-
-/* SLIDES */
-.slides {
-    display: flex;
-    transition: transform 0.6s ease-in-out;
-}
-
-.slides img {
-    width: 100%;
-    height: 220px; /* control banner height */
-    object-fit: contain; /* fills everything */
-    flex-shrink: 0;
-}
-
-/* DOTS */
-.dots {
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
-}
-
-.dots span {
-    height: 8px;
-    width: 8px;
-    margin: 0 4px;
-    display: inline-block;
-    background: white;
-    opacity: 0.5;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.dots .active {
-    opacity: 1;
-}
-.slide {
-    position: relative;
-    width: 100%;
-    flex-shrink: 0;
-}
-
-.overlay {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    color: white;
-}
-
-.overlay h2 {
-    margin: 0;
-    font-size: 1.5em;
-}
-
-.overlay p {
-    margin: 5px 0;
-    font-size: 0.9em;
-}
-.overlay {
-    background: rgba(0, 0, 0, 0.919);
-    padding: 10px;
-    border-radius: 8px;
+    showSlide(index);
 }
